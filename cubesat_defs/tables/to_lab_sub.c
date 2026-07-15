@@ -1,5 +1,5 @@
 /************************************************************************
- * NASA Docket No. GSC-18,719-1, and identified as “core Flight System: Bootes”
+ * NASA Docket No. GSC-18,719-1, and identified as "core Flight System: Bootes"
  *
  * Copyright (c) 2020 United States Government as represented by the
  * Administrator of the National Aeronautics and Space Administration.
@@ -19,6 +19,9 @@
 /**
  * \file
  *  Define TO Lab CPU specific subscription table
+ *
+ *  CubeSat simulator: trimmed to only the apps in this mission
+ *  (CFE core, CI_LAB, TO_LAB, SAMPLE_APP, SC).
  */
 
 #include "cfe_tbl_filedef.h" /* Required to obtain the CFE_TBL_FILEDEF macro definition */
@@ -26,27 +29,13 @@
 #include "to_lab_tbl.h"
 
 /*
-** Add the proper include file for the message IDs below
-*/
-
-/*
-** Common CFS app includes below are commented out
+** Message ID header files - only for apps present in this mission
 */
 #include "cfe_msgids.h"
 #include "to_lab_msgids.h"
 #include "ci_lab_msgids.h"
-
 #include "sample_app_msgids.h"
-#include "cf_msgids.h"
-#include "hs_msgids.h"
-#include "md_msgids.h"
-#include "fm_msgids.h"
-#include "lc_msgids.h"
-#include "cs_msgids.h"
-#include "mm_msgids.h"
 #include "sc_msgids.h"
-#include "ds_msgids.h"
-#include "hk_msgids.h"
 
 #ifdef CFS_SBN_ENABLED
 #include "sbn_msgids.h"
@@ -75,24 +64,9 @@ TO_LAB_Subs_t TO_LAB_Subs =
         {CFE_SB_MSGID_WRAP_VALUE(CFE_ES_MEMSTATS_TLM_MID),    {0, 0}, 1},
 
         /* Other CFS apps */
-        {CFE_SB_MSGID_WRAP_VALUE(SAMPLE_APP_HK_TLM_MID), {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(CF_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(CF_EOT_TLM_MID),        {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(CF_CH0_TX_MID),        {0, 0}, 5},
-        {CFE_SB_MSGID_WRAP_VALUE(CF_CH1_TX_MID),        {0, 0}, 5},
-        {CFE_SB_MSGID_WRAP_VALUE(MD_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(HS_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(HK_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(MM_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(SC_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(FM_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(FM_FILE_INFO_TLM_MID),  {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(FM_DIR_LIST_TLM_MID),   {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(FM_OPEN_FILES_TLM_MID), {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(FM_MONITOR_TLM_MID),    {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(DS_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(LC_HK_TLM_MID),         {0, 0}, 1},
-        {CFE_SB_MSGID_WRAP_VALUE(CS_HK_TLM_MID),         {0, 0}, 1},
+        {CFE_SB_MSGID_WRAP_VALUE(SAMPLE_APP_HK_TLM_MID),      {0, 0}, 1},
+        {CFE_SB_MSGID_WRAP_VALUE(SC_HK_TLM_MID),              {0, 0}, 1},
+
 #ifdef CFS_SBN_ENABLED
         {CFE_SB_MSGID_WRAP_VALUE(SBN_HK_TLM_MID),         {0, 0}, 1},
         {CFE_SB_MSGID_WRAP_VALUE(SBN_HKNET_TLM_MID),      {0, 0}, 1},

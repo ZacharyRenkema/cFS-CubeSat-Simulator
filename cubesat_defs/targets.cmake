@@ -88,24 +88,24 @@ SET(SPACECRAFT_ID 0x42)
 # Example:
 list(APPEND MISSION_GLOBAL_APPLIST sample_app sample_lib)
 
-LIST(APPEND MISSION_GLOBAL_APPLIST cf)
-LIST(APPEND MISSION_GLOBAL_APPLIST hs)
-LIST(APPEND MISSION_GLOBAL_APPLIST md)
-LIST(APPEND MISSION_GLOBAL_APPLIST mm)
-LIST(APPEND MISSION_GLOBAL_APPLIST cs)
-LIST(APPEND MISSION_GLOBAL_APPLIST fm)
-LIST(APPEND MISSION_GLOBAL_APPLIST lc)
-LIST(APPEND MISSION_GLOBAL_APPLIST sc)
-LIST(APPEND MISSION_GLOBAL_APPLIST ds)
-LIST(APPEND MISSION_GLOBAL_APPLIST hk)
+# LIST(APPEND MISSION_GLOBAL_APPLIST cf)
+# LIST(APPEND MISSION_GLOBAL_APPLIST hs)
+# LIST(APPEND MISSION_GLOBAL_APPLIST md)
+# LIST(APPEND MISSION_GLOBAL_APPLIST mm)
+# LIST(APPEND MISSION_GLOBAL_APPLIST cs)
+# LIST(APPEND MISSION_GLOBAL_APPLIST fm)
+# LIST(APPEND MISSION_GLOBAL_APPLIST lc)
+# LIST(APPEND MISSION_GLOBAL_APPLIST sc)
+# LIST(APPEND MISSION_GLOBAL_APPLIST ds)
+# LIST(APPEND MISSION_GLOBAL_APPLIST hk)
 
 # Some apps do not have EDS support yet.
 # These should not be included by default when building with EDS.
-if (NOT CFE_EDS_ENABLED AND SIMULATION STREQUAL "native")
-    LIST(APPEND MISSION_GLOBAL_APPLIST sbn)
-    LIST(APPEND MISSION_GLOBAL_APPLIST sbn_udp)
-    LIST(APPEND MISSION_GLOBAL_APPLIST sbn_f_remap)
-endif()
+# if (NOT CFE_EDS_ENABLED AND SIMULATION STREQUAL "native")
+#     LIST(APPEND MISSION_GLOBAL_APPLIST sbn)
+#     LIST(APPEND MISSION_GLOBAL_APPLIST sbn_udp)
+#     LIST(APPEND MISSION_GLOBAL_APPLIST sbn_f_remap)
+# endif()
 
 # The "MISSION_GLOBAL_STATIC_APPLIST" is similar to MISSION_GLOBAL_APPLIST
 # but the apps are statically linked.
@@ -122,28 +122,29 @@ SET(MISSION_CPUNAMES cpu1)
 
 # Skip cpu2 on the pc686_rtems5 configuration, as it becomes a resource drain
 # (the images on this configuration are much larger)
-if (NOT SIMULATION STREQUAL "i686-rtems5")
-    list(APPEND MISSION_CPUNAMES cpu2)
-endif ()
+# if (NOT SIMULATION STREQUAL "i686-rtems5")
+#     list(APPEND MISSION_CPUNAMES cpu2)
+# endif ()
 
 # The "cpu1" is a contrived example of a main processor, running
 # all the CFS apps.  RISCV-64 is selected as the platform
 # to line up with expectations of next-gen flight hardware.
 SET(cpu1_PROCESSORID 1)
-SET(cpu1_APPLIST ci_lab to_lab sch_lab)
+SET(cpu1_APPLIST ci_lab to_lab sch_lab sc)
 SET(cpu1_SYSTEM riscv64-poky-linux)
 
 # The "cpu2" is a contrived example of a helper system,
 # using a big-endian processor by default.  This emulates
 # a heterogeneous deployment where a big- and little-
 # endian processor must work together in the same system.
-SET(cpu2_PROCESSORID 2)
-SET(cpu2_APPLIST ci_lab to_lab sch_lab)
-SET(cpu2_SYSTEM mips32r2-poky-linux)
+# Removed cpu2 because it is not needed for the scope of this project, but leaving the example here for reference.
+# SET(cpu2_PROCESSORID 2)
+# SET(cpu2_APPLIST ci_lab to_lab sch_lab)
+# SET(cpu2_SYSTEM mips32r2-poky-linux)
 
 # the EDS build always uses runtime mids, so in this configuration
 # we can save a lot of resources by sharing the same platform config
 if (CFE_EDS_ENABLED)
    set(cpu1_PLATFORM default)
-   set(cpu2_PLATFORM default)
+#    set(cpu2_PLATFORM default)
 endif (CFE_EDS_ENABLED)
